@@ -173,3 +173,15 @@
 .cosmic-particle {
   animation: particle-float 8s ease-in-out infinite;
 }
+
+@font-face {
+  font-family: "AquireBold";
+  src: url("/AquireBold-8Ma60.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.logo-text {
+  font-family: "AquireBold", sans-serif;
+  font-size: 2rem;
+}

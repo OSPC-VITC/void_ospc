@@ -68,9 +68,10 @@ export default function HomePage() {
           </Badge>
 
           {/* Main Heading */}
-          <h1 className="text-5xl md:text-7xl font-bold leading-tight font-sans bg-gradient-to-r from-[#E0AAFF] via-[#C77DFF] to-[#9D4EDD] bg-clip-text text-transparent">
+          <h1 className="text-9xl md:text-[12rem] font-bold leading-tight font-sans bg-gradient-to-r from-[#E0AAFF] via-[#C77DFF] to-[#9D4EDD] bg-clip-text text-transparent logo-text">
             Void
           </h1>
+
 
           {/* Subheading */}
           <p className="text-xl text-[#BBA9CC] max-w-2xl font-serif">24 Hour Hackathon</p>
