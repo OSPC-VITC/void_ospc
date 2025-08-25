@@ -53,8 +53,6 @@ export default function HomePage() {
       <div className="absolute bottom-0 left-0 w-[650px] h-[650px] bg-gradient-radial from-[#9D4EDD]/20 via-transparent to-transparent rounded-full blur-3xl animate-pulse" />
       <div className="absolute top-1/3 left-1/2 w-[500px] h-[500px] bg-gradient-radial from-[#240046]/30 via-transparent to-transparent rounded-full blur-2xl animate-pulse" />
 
-      <Navbar />
-
       {/* Hero Content */}
       <main className="relative z-10 flex flex-col items-center text-center px-6 py-16">
         <div className="flex flex-col items-center gap-8 max-w-4xl mx-auto">
