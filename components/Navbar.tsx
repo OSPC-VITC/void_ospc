@@ -4,10 +4,9 @@ import { LogIn } from "lucide-react"
 function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Glass backdrop with multiple layers */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-purple-900/20 to-black/10 backdrop-blur-xl"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent"></div>
-      <div className="absolute inset-0 border-b border-white/10 shadow-2xl shadow-purple-500/10"></div>
+      {/* Glass backdrop with seamless blending layers */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-purple-900/15 to-black/10 backdrop-blur-2xl"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-transparent"></div>
 
       <div className="relative flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
         <div className="flex items-center gap-3">
@@ -24,7 +23,7 @@ function Navbar() {
         <nav className="hidden md:flex items-center relative">
           <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-md rounded-2xl"></div>
           <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 via-transparent to-blue-500/10 rounded-2xl"></div>
-          <div className="absolute inset-0 border border-white/20 rounded-2xl shadow-xl shadow-black/20"></div>
+          <div className="absolute inset-0 border border-white/20 rounded-2xl shadow-sm shadow-black/20"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent rounded-2xl"></div>
 
           <div className="relative flex items-center gap-1 px-6 py-3">
