@@ -9,6 +9,11 @@ import EventHorizon from "@/components/EventHorizon"
 import AnimatedDots from "@/components/AnimatedDots"
 import { useRef } from "react"
 import { HeroScrollDemo } from "@/components/HeroScrollDemo"
+import AboutSection from "@/components/AboutSection"
+import TracksSection from "@/components/TracksSection"
+import PrizesSection from "@/components/PrizesSection"
+import JudgesSection from "@/components/JudgesSection"
+import OrganisersSection from "@/components/OrganizersSection"
 
 export default function HomePage() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -57,7 +62,7 @@ export default function HomePage() {
           >
             <FaCalendarAlt className="text-purple-400 text-lg" />
             <span className="text-white text-sm md:text-xl font-medium">
-              April 11-12, 2025
+              September 22-23, 2025
             </span>
           </motion.div>
           <motion.div
@@ -81,6 +86,11 @@ export default function HomePage() {
         <img src="/header.gif" alt="" />
 
         <HeroScrollDemo/>
+        <AboutSection/>
+        <TracksSection/>
+        <PrizesSection/>
+        <JudgesSection/>
+        <OrganisersSection/>
 
       </main>
     </div>
