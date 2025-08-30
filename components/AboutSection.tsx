@@ -113,7 +113,7 @@ const AboutSection: React.FC = () => {
   };
 
   return (
-    <section id="about" className="relative text-white py-36 overflow-hidden" ref={ref}>
+    <section id="about" className="relative text-white py-24 overflow-hidden" ref={ref}>
       {/* Dynamic background elements removed */}
       
       <div className="relative z-10 container mx-auto px-4 md:px-8">
@@ -125,7 +125,7 @@ const AboutSection: React.FC = () => {
         >
           <motion.div
             variants={itemVariants}
-            className="text-center mb-24"
+            className="text-center mb-16"
           >
             <motion.div 
               className="inline-block mb-6"
@@ -135,16 +135,16 @@ const AboutSection: React.FC = () => {
             >
               <motion.div animate={floatingAnimation} className="inline-block mb-5">
               <div className="relative">
-                <div className="inline-block h-14 w-14 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 blur-md opacity-70"></div>
+                <div className="inline-block h-14 w-14 rounded-full bg-gradient-to-br from-purple-600 to-violet-800 blur-md opacity-70"></div>
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold tracking-wide text-lg">
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">24H</span>
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-violet-400">24H</span>
                 </div>
               </div>
             </motion.div>
             </motion.div>
             
             
-          <h2 className="mb-10 text-center font-bold tracking-wider leading-tight" style={{ fontSize: "clamp(40px, 10vw, 70px)" }}>
+          <h2 className="mb-10 text-center font-bold tracking-wider leading-tight font-heading" style={{ fontSize: "clamp(40px, 10vw, 70px)" }}>
             <span className="text-white">ABOUT </span>
               <motion.span 
                 className="relative inline-block"
@@ -152,15 +152,15 @@ const AboutSection: React.FC = () => {
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
               >
-                <span className="absolute -inset-1 rounded-lg blur-md bg-gradient-to-r from-purple-500/20 to-blue-500/20 opacity-50"></span>
-                <span className="relative inline-block bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
+                <span className="absolute -inset-1 rounded-lg blur-md bg-gradient-to-r from-purple-600/20 to-violet-800/20 opacity-50"></span>
+                <span className="relative inline-block bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-violet-700">
                   {titleLetters.map((letter, index) => (
                     <motion.span
                       key={index}
                       variants={letterVariants}
                       className="inline-block"
                       style={{ 
-                        textShadow: "0 0 25px rgba(139, 92, 246, 0.3)" 
+                        textShadow: "0 0 25px rgba(139, 92, 246, 0.4)" 
                       }}
                     >
                       {letter}
@@ -171,7 +171,7 @@ const AboutSection: React.FC = () => {
             </h2>
             
             <motion.div 
-              className="h-1 w-32 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-10 rounded-full"
+              className="h-1 w-32 bg-gradient-to-r from-purple-600 to-violet-800 mx-auto mb-10 rounded-full"
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: "8rem", opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -184,10 +184,10 @@ const AboutSection: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <p className="mb-4">
-                SPECTRUM isn&apos;t just a hackathon—it&apos;s a dynamic fusion of innovation, technology, and entrepreneurship. We challenge participants to push boundaries, craft groundbreaking solutions, and transform bold ideas into reality. With a focus on real-world impact, Spectrum is where vision meets execution.
+                VOID isn&apos;t just a hackathon—it&apos;s an immersive journey into the depths of innovation and technology. We challenge participants to explore the uncharted territories of creativity, craft solutions that defy conventional boundaries, and transform abstract concepts into tangible realities.
               </p>
               <p className="text-purple-400 font-semibold italic">
-                Get ready to innovate, collaborate, and shape the future—one breakthrough at a time!
+                Venture into the unknown, collaborate with brilliant minds, and emerge with creations that reshape our digital landscape!
               </p>
             </motion.div>
           </motion.div>
@@ -213,7 +213,7 @@ const AboutSection: React.FC = () => {
                 <CardContent className="p-8 !rounded-none">
                   <div className="flex items-center mb-5">
                     <motion.span 
-                      className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-purple-900/20 backdrop-blur-sm group-hover:from-purple-500/30 group-hover:to-purple-900/30 transition-all duration-300 shadow-md overflow-hidden"
+                      className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-600/20 to-violet-800/20 backdrop-blur-sm group-hover:from-purple-500/30 group-hover:to-violet-800/30 transition-all duration-300 shadow-md overflow-hidden"
                       variants={iconVariants}
                       whileHover="hover"
                     >
@@ -225,16 +225,16 @@ const AboutSection: React.FC = () => {
                         <Calendar className="h-7 w-7 text-purple-400" />
                       </motion.div>
                       <motion.div 
-                        className="absolute inset-0 bg-purple-500/10 rounded-full"
+                        className="absolute inset-0 bg-purple-600/10 rounded-full"
                         initial={{ scale: 0 }}
                         animate={{ scale: [0, 1.5, 0] }}
                         transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
                       />
                     </motion.span>
-                    <h3 className="text-2xl font-['Megrim'] ml-5 font-semibold tracking-wide text-white">The Event</h3>
+                    <h3 className="text-2xl font-heading ml-5 font-semibold tracking-wide text-white">The Event</h3>
                   </div>
                   <p className="text-base md:text-lg text-gray-300 leading-relaxed">
-                    With high-impact tracks, we push participants to think like founders, craft scalable solutions, and tackle pressing challenges. But it doesn&apos;t stop there—we&apos;re redefining the hackathon experience with live music, flash mobs, and immersive activities that ignite creativity and energy.
+                    With our cutting-edge tracks focused on future technologies, VOID challenges participants to think beyond the conventional, developing solutions that bridge the gap between imagination and reality. Experience a hackathon that's not just about coding but about creating technological marvels that could define tomorrow.
                   </p>
                 </CardContent>
               </Card>
@@ -246,7 +246,7 @@ const AboutSection: React.FC = () => {
               whileHover="hover"
               className="relative"
             >
-              <Card className="relative bg-gradient-to-br from-blue-950/30 to-black/60 backdrop-blur-md overflow-hidden shadow-lg hover:shadow-blue-900/20 h-full card-container !rounded-none">
+              <Card className="relative bg-gradient-to-br from-violet-950/30 to-black/60 backdrop-blur-md overflow-hidden shadow-lg hover:shadow-violet-900/20 h-full card-container !rounded-none">
                 <div className="a l"></div>
                 <div className="a r"></div>
                 <div className="a t"></div>
@@ -254,7 +254,7 @@ const AboutSection: React.FC = () => {
                 <CardContent className="p-8 !rounded-none">
                   <div className="flex items-center mb-5">
                     <motion.span 
-                      className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-900/20 backdrop-blur-sm group-hover:from-blue-500/30 group-hover:to-blue-900/30 transition-all duration-300 shadow-md overflow-hidden"
+                      className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-violet-600/20 to-purple-900/20 backdrop-blur-sm group-hover:from-violet-500/30 group-hover:to-purple-900/30 transition-all duration-300 shadow-md overflow-hidden"
                       variants={iconVariants}
                       whileHover="hover"
                     >
@@ -263,19 +263,19 @@ const AboutSection: React.FC = () => {
                         animate={{ scale: 1 }}
                         transition={{ duration: 0.5 }}
                       >
-                        <Shield className="h-7 w-7 text-blue-400" />
+                        <Shield className="h-7 w-7 text-violet-400" />
                       </motion.div>
                       <motion.div 
-                        className="absolute inset-0 bg-blue-500/10 rounded-full"
+                        className="absolute inset-0 bg-violet-600/10 rounded-full"
                         initial={{ scale: 0 }}
                         animate={{ scale: [0, 1.5, 0] }}
                         transition={{ duration: 2, repeat: Infinity, repeatDelay: 3.5 }}
                       />
                     </motion.span>
-                    <h3 className="text-2xl font-['Megrim'] ml-5 font-semibold tracking-wide text-white">Our Approach</h3>
+                    <h3 className="text-2xl font-heading ml-5 font-semibold tracking-wide text-white">Our Approach</h3>
                   </div>
                   <p className="text-base md:text-lg text-gray-300 leading-relaxed">
-                    Elevating the excitement, IBM Z presents an exclusive speaker session, offering expert insights, cutting-edge trends, and practical guidance to empower your entrepreneurial journey.
+                    At VOID, we don't just promote innovation—we foster an environment where technological boundaries dissolve. With mentorship from industry experts and exclusive speaker sessions, participants gain insights that transform their ideas from concepts to impactful solutions ready for the real world.
                   </p>
                 </CardContent>
               </Card>
@@ -306,7 +306,7 @@ const AboutSection: React.FC = () => {
           pointer-events: none;
           position: absolute;
           --w: 2px;
-          --glow-color: rgba(168, 85, 247, 0.8);
+          --glow-color: rgba(147, 51, 234, 0.8);
           z-index: 30;
           filter: drop-shadow(0 0 5px var(--glow-color));
           transition: all 0.3s ease;
@@ -340,56 +340,56 @@ const AboutSection: React.FC = () => {
           left: 0;
           background: linear-gradient(to bottom, 
             transparent 0%, 
-            rgba(168, 85, 247, 0.8) 15%, 
-            rgba(168, 85, 247, 0.8) 85%, 
+            rgba(147, 51, 234, 0.8) 15%, 
+            rgba(147, 51, 234, 0.8) 85%, 
             transparent 100%
           );
           top: 0;
           bottom: 0;
           width: var(--w);
-          box-shadow: 0 0 15px 2px rgba(168, 85, 247, 0.8);
+          box-shadow: 0 0 15px 2px rgba(147, 51, 234, 0.8);
         }
 
         .r {
           right: 0;
           background: linear-gradient(to bottom, 
             transparent 0%, 
-            rgba(168, 85, 247, 0.8) 15%, 
-            rgba(168, 85, 247, 0.8) 85%, 
+            rgba(147, 51, 234, 0.8) 15%, 
+            rgba(147, 51, 234, 0.8) 85%, 
             transparent 100%
           );
           top: 0;
           bottom: 0;
           width: var(--w);
-          box-shadow: 0 0 15px 2px rgba(168, 85, 247, 0.8);
+          box-shadow: 0 0 15px 2px rgba(147, 51, 234, 0.8);
         }
 
         .t {
           top: 0;
           background: linear-gradient(to right, 
             transparent 0%, 
-            rgba(168, 85, 247, 0.8) 15%, 
-            rgba(168, 85, 247, 0.8) 85%, 
+            rgba(147, 51, 234, 0.8) 15%, 
+            rgba(147, 51, 234, 0.8) 85%, 
             transparent 100%
           );
           left: 0;
           right: 0;
           height: var(--w);
-          box-shadow: 0 0 15px 2px rgba(168, 85, 247, 0.8);
+          box-shadow: 0 0 15px 2px rgba(147, 51, 234, 0.8);
         }
 
         .b {
           bottom: 0;
           background: linear-gradient(to right, 
             transparent 0%, 
-            rgba(168, 85, 247, 0.8) 15%, 
-            rgba(168, 85, 247, 0.8) 85%, 
+            rgba(147, 51, 234, 0.8) 15%, 
+            rgba(147, 51, 234, 0.8) 85%, 
             transparent 100%
           );
           left: 0;
           right: 0;
           height: var(--w);
-          box-shadow: 0 0 15px 2px rgba(168, 85, 247, 0.8);
+          box-shadow: 0 0 15px 2px rgba(147, 51, 234, 0.8);
         }
 
         .card-container {
@@ -400,32 +400,22 @@ const AboutSection: React.FC = () => {
           border-radius: 0 !important;
         }
 
+        .card-container:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 30px rgba(138, 43, 226, 0.2);
+        }
+
         .card-container:hover .a {
-          filter: none;
-          box-shadow: none;
+          --glow-color: rgba(138, 43, 226, 1);
+          filter: drop-shadow(0 0 8px var(--glow-color));
         }
 
         .card-container:hover .l,
         .card-container:hover .r,
         .card-container:hover .t,
         .card-container:hover .b {
-          box-shadow: none;
-          background: linear-gradient(to bottom, 
-            transparent 0%, 
-            rgba(168, 85, 247, 0.8) 15%, 
-            rgba(168, 85, 247, 0.8) 85%, 
-            transparent 100%
-          );
-        }
-
-        .card-container:hover .t,
-        .card-container:hover .b {
-          background: linear-gradient(to right, 
-            transparent 0%, 
-            rgba(168, 85, 247, 0.8) 15%, 
-            rgba(168, 85, 247, 0.8) 85%, 
-            transparent 100%
-          );
+          --w: 3px;
+          box-shadow: 0 0 20px 3px rgba(138, 43, 226, 0.8);
         }
       `}</style>
     </section>

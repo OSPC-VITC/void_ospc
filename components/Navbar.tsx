@@ -1,161 +1,241 @@
-"use client"
-import { Button } from "@/components/ui/button"
-import type React from "react"
+'use client';
 
-import { LogIn, Menu, X } from "lucide-react"
-import { useCallback, useRef, useState } from "react"
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { GitHubLogoIcon, LinkedInLogoIcon } from '@radix-ui/react-icons';
+import { usePathname } from 'next/navigation';
 
-function Navbar() {
-  const headerRef = useRef<HTMLElement>(null)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [activeId, setActiveId] = useState<string | null>(null)
-
-  const scrollToId = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-      e.preventDefault()
-      setActiveId(id)
-
-      const doScroll = () => {
-        const el = document.getElementById(id)
-        if (!el) return
-        const headerH = headerRef.current?.offsetHeight ?? 80
-        const y = el.getBoundingClientRect().top + window.pageYOffset - headerH - 8
-        window.scrollTo({ top: y, behavior: "smooth" })
-      }
-
-      if (isMenuOpen) {
-        setIsMenuOpen(false)
-        requestAnimationFrame(() => requestAnimationFrame(doScroll))
-      } else {
-        doScroll()
-      }
-    },
-    [isMenuOpen],
-  )
-
-  const goTop = useCallback(() => {
-    if (isMenuOpen) setIsMenuOpen(false)
-    setActiveId(null)
-    window.scrollTo({ top: 0, behavior: "smooth" })
-    if (typeof window !== "undefined" && window.history?.replaceState) {
-      window.history.replaceState(null, "", window.location.pathname + window.location.search)
-    }
-  }, [isMenuOpen])
-
-  const navItems = [
-    { id: "about", label: "About Us" },
-    { id: "tracks", label: "Tracks" },
-    { id: "prizes", label: "Prizes" },
-    { id: "judges", label: "Judges" },
-    { id: "organizers", label: "Organizers" },
-  ] as const
-
-  const NavItem = ({ id, label, isActive }: { id: string; label: string; isActive?: boolean }) => (
-    <a
-      href={`#${id}`}
-      aria-current={isActive ? "page" : undefined}
-      onClick={(e) => scrollToId(e, id)}
-      className={`relative px-4 py-2 font-medium outline-none transition-all duration-300 group
-        ${isActive ? "text-cyan-300" : "text-white/80"}
-        hover:text-cyan-300 focus-visible:text-cyan-300 active:text-cyan-300`}
-    >
-      <span className="relative z-10 drop-shadow-sm">{label}</span>
-      <div
-        className={`absolute inset-0 rounded-lg backdrop-blur-sm transition-all duration-300
-          ${isActive ? "opacity-100 bg-gradient-to-r from-cyan-400/0 via-cyan-400/20 to-cyan-400/0" : "opacity-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/20 to-cyan-400/0"}
-          group-hover:opacity-100 group-active:opacity-100 group-focus-visible:opacity-100`}
-      />
-      <div
-        className={`absolute inset-0 rounded-lg transition-all duration-300
-          ${isActive ? "border border-cyan-300/40 shadow-lg shadow-cyan-400/20" : "border border-cyan-300/0 shadow-lg shadow-cyan-400/0"}
-          group-hover:border-cyan-300/40 group-active:border-cyan-300/40 group-focus-visible:border-cyan-300/40
-          group-hover:shadow-cyan-400/20 group-active:shadow-cyan-400/20 group-focus-visible:shadow-cyan-400/20`}
-      />
-      <div
-        className={`absolute inset-0 rounded-lg transition-all duration-300
-          ${isActive ? "bg-white/5" : "bg-white/0"}
-          group-hover:bg-white/5 group-active:bg-white/5 group-focus-visible:bg-white/5`}
-      />
-    </a>
-  )
-
-  return (
-    <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 bg-transparent">
-      <div className="relative flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-        <div className="flex items-center gap-3">
-          <div className="relative w-8 h-8 rounded-lg overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-400/80 via-purple-500/60 to-purple-700/80 backdrop-blur-sm"></div>
-            <div className="absolute inset-0 bg-white/10 border border-white/20 rounded-lg"></div>
-            <div className="relative w-full h-full flex items-center justify-center">
-              <div className="w-3 h-3 bg-white/90 rounded-sm shadow-lg" />
-            </div>
-          </div>
-          <span
-            role="button"
-            tabIndex={0}
-            onClick={goTop}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault()
-                goTop()
-              }
-            }}
-            className="text-xl cursor-pointer font-semibold text-white/95 tracking-tight drop-shadow-lg logo-text"
-          >
-            Void
-          </span>
-        </div>
-
-        <nav className="hidden md:flex items-center relative bg-transparent">
-          <div className="relative flex items-center gap-1 px-6 py-3">
-            {navItems.map((item) => (
-              <NavItem key={item.id} id={item.id} label={item.label} isActive={activeId === item.id} />
-            ))}
-          </div>
-        </nav>
-
-        <div className="flex items-center gap-3">
-          <Button
-            variant="ghost"
-            className="relative text-white/90 cursor-pointer bg-gradient-to-r from-purple-500/60 to-purple-600/60 backdrop-blur-md border border-white/20 hover:bg-white/10 transition-all duration-300 font-medium md:flex hidden items-center gap-2 shadow-lg shadow-purple-500/20 hover:shadow-purple-400/30 hover:scale-105"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 rounded-md"></div>
-            <LogIn className="w-4 h-4 relative z-10 drop-shadow-sm" />
-            <span className="relative z-10 drop-shadow-sm">Login</span>
-          </Button>
-
-          <button
-            type="button"
-            aria-label="Toggle menu"
-            aria-controls="mobile-menu"
-            aria-expanded={isMenuOpen}
-            onClick={() => setIsMenuOpen((v) => !v)}
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-white/90 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 transition"
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-
-      <div
-        id="mobile-menu"
-        className={`md:hidden px-4 pb-4 transition-colors ${isMenuOpen ? "block" : "hidden"} bg-black/80 backdrop-blur-md border-t border-white/10 shadow-lg`}
-      >
-        <div className="flex flex-col gap-1">
-          {navItems.map((item) => (
-            <NavItem key={item.id} id={item.id} label={item.label} isActive={activeId === item.id} />
-          ))}
-          <Button
-            variant="ghost"
-            className="mt-2 w-full relative text-white/90 cursor-pointer bg-gradient-to-r from-purple-500/60 to-purple-600/60 backdrop-blur-md border border-white/20 hover:bg-white/10 transition-all duration-300 font-medium flex items-center justify-center gap-2 shadow-lg shadow-purple-500/20 hover:shadow-purple-400/30"
-          >
-            <LogIn className="w-4 h-4" />
-            <span>Login</span>
-          </Button>
-        </div>
-      </div>
-    </header>
-  )
+interface NavLink {
+  id: string;
+  title: string;
+  path: string;
 }
 
-export default Navbar
+const navLinks: NavLink[] = [
+  { id: 'home', title: 'Home', path: '/' },
+  { id: 'about', title: 'About', path: '/#about' },
+  { id: 'tracks', title: 'Tracks', path: '/#tracks' },
+  { id: 'prizes', title: 'Prizes', path: '/#prizes' },
+  { id: 'judges', title: 'Judges', path: '/#judges' },
+  { id: 'organisers', title: 'Organisers', path: '/#organisers' },
+];
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const navVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  return (
+    <motion.nav 
+      className="fixed w-full z-50 top-0 backdrop-blur-md bg-black/20 border-b border-purple-700/20"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <motion.div 
+            className="flex-shrink-0"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <Link href="/" className="flex items-center">
+              <span className="logo-text text-white mr-2">VOID</span>
+            </Link>
+          </motion.div>
+
+          {/* Desktop Navigation - Now centered with flex-grow */}
+          <motion.div 
+            className="hidden md:flex flex-grow justify-center items-center"
+            variants={navVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <div className="flex space-x-8">
+              {navLinks.map((link) => (
+                <motion.div 
+                  key={link.id} 
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link
+                    href={link.path}
+                    className={`text-sm text-gray-200 hover:text-purple-400 font-medium transition duration-300 relative nav-link`}
+                  >
+                    {link.title}
+                    <span className="nav-link-underline"></span>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+            
+          {/* Right side icons and Register button */}
+          <div className="hidden md:flex items-center space-x-4">
+            <motion.div variants={itemVariants} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
+              <a href="https://github.com/OSPC-VITC" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors">
+                <GitHubLogoIcon className="h-5 w-5" />
+              </a>
+            </motion.div>
+            
+            <motion.div variants={itemVariants} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
+              <a href="https://www.linkedin.com/company/opensource-programming-club-vitc" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors">
+                <LinkedInLogoIcon className="h-5 w-5" />
+              </a>
+            </motion.div>
+            
+            <motion.div 
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="void-border-pulse"
+            >
+              <a href="#" className="bg-gradient-to-r from-purple-600 to-violet-700 text-white py-2 px-4 rounded-md text-sm font-medium shadow-lg hover:shadow-purple-500/50 transition-all duration-300">
+                Register Now
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Mobile Navigation Toggle Button */}
+          <div className="md:hidden">
+            <button
+              onClick={toggleMenu}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white focus:outline-none"
+            >
+              <span className="sr-only">Open main menu</span>
+              <div className="h-6 w-6 flex flex-col justify-between items-center">
+                <span 
+                  className={`block w-full h-0.5 bg-current transform transition duration-300 ease-in-out ${isOpen ? 'rotate-45 translate-y-2.5' : ''}`}
+                ></span>
+                <span 
+                  className={`block w-full h-0.5 bg-current transition duration-300 ease-in-out ${isOpen ? 'opacity-0' : ''}`}
+                ></span>
+          <span
+                  className={`block w-full h-0.5 bg-current transform transition duration-300 ease-in-out ${isOpen ? '-rotate-45 -translate-y-2.5' : ''}`}
+                ></span>
+        </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Navigation Menu */}
+      {isOpen && (
+        <motion.div 
+          className="md:hidden"
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/50 backdrop-blur-lg border-t border-purple-900/20">
+            {navLinks.map((link) => (
+              <Link
+                key={link.id}
+                href={link.path}
+                className="block text-sm px-3 py-2 text-gray-200 hover:text-purple-400 transition duration-300"
+              >
+                {link.title}
+              </Link>
+            ))}
+            <div className="flex space-x-4 px-3 py-2">
+              <a href="https://github.com/OSPC-VITC" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors">
+                <GitHubLogoIcon className="h-5 w-5" />
+              </a>
+              <a href="https://www.linkedin.com/company/opensource-programming-club-vitc" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors">
+                <LinkedInLogoIcon className="h-5 w-5" />
+              </a>
+            </div>
+            <div className="px-3 py-2">
+              <a href="#" className="block bg-gradient-to-r from-purple-600 to-violet-700 text-white py-2 px-4 rounded-md text-center text-sm font-medium shadow-lg hover:shadow-purple-500/50 transition-all duration-300">
+                Register Now
+              </a>
+        </div>
+      </div>
+        </motion.div>
+      )}
+
+      <style jsx>{`
+        .nav-link {
+          position: relative;
+          display: inline-block;
+        }
+        
+        .nav-link-underline {
+          position: absolute;
+          left: 0;
+          bottom: -4px;
+          width: 0;
+          height: 2px;
+          background: linear-gradient(90deg, #9333EA, #A855F7);
+          transition: width 0.3s ease;
+          border-radius: 3px;
+        }
+        
+        .nav-link:hover .nav-link-underline {
+          width: 100%;
+        }
+        
+        .void-border-pulse {
+          position: relative;
+          overflow: hidden;
+          border-radius: 0.375rem; /* rounded-md */
+          z-index: 1;
+        }
+        
+        .void-border-pulse::before {
+          content: '';
+          position: absolute;
+          inset: -2px;
+          background: linear-gradient(
+            45deg, 
+            rgba(138, 43, 226, 0.8), 
+            rgba(147, 51, 234, 0.8),
+            rgba(168, 85, 247, 0.8),
+            rgba(138, 43, 226, 0.8)
+          );
+          z-index: -1;
+          animation: pulse-rotate 2s linear infinite;
+          border-radius: 0.5rem;
+        }
+        
+        @keyframes pulse-rotate {
+          0% {
+            transform: rotate(0deg);
+            opacity: 0.8;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            transform: rotate(360deg);
+            opacity: 0.8;
+          }
+        }
+      `}</style>
+    </motion.nav>
+  );
+}

@@ -5,17 +5,6 @@ import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Linkedin } from 'lucide-react';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 
-// Image URLs from your request
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const COVERS = [
-  "https://i.scdn.co/image/ab67616d00001e020ecc8c4fd215d9eb83cbfdb3",
-  "https://i.scdn.co/image/ab67616d00001e02d9194aa18fa4c9362b47464f",
-  "https://i.scdn.co/image/ab67616d00001e02a7ea08ab3914c5fb2084a8ac",
-  "https://i.scdn.co/image/ab67616d00001e0213ca80c3035333e5a6fcea59",
-  "https://i.scdn.co/image/ab67616d00001e02df04e6071763615d44643725",
-  "https://i.scdn.co/image/ab67616d00001e0239c7302c04f8d06f60e14403"
-];
-
 // Judge data
 const JUDGES = [
   {
@@ -155,12 +144,12 @@ export default function JudgesSection() {
           transition={{ duration: 0.8 }}
         >
           
-          <h2 className="mb-10 text-center font-bold tracking-wider leading-tight" style={{ fontSize: "clamp(40px, 10vw, 70px)" }}>
+          <h2 className="mb-10 text-center font-bold tracking-wider leading-tight font-heading" style={{ fontSize: "clamp(40px, 10vw, 70px)" }}>
             <span className="text-white">MEET OUR </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">JUDGES</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-violet-700">JUDGES</span>
           </h2>
           <motion.div 
-            className="h-1 w-32 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-10 rounded-full"
+            className="h-1 w-32 bg-gradient-to-r from-purple-600 to-violet-800 mx-auto mb-10 rounded-full"
             initial={{ width: 0, opacity: 0 }}
             animate={{ width: "8rem", opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -193,7 +182,7 @@ export default function JudgesSection() {
                   style={{ 
                     transformStyle: "preserve-3d",
                     boxShadow: index === activeIndex ? 
-                      "0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 15px rgba(124, 58, 237, 0.5)" : 
+                      "0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 15px rgba(147, 51, 234, 0.5)" : 
                       "0 20px 25px -5px rgba(0, 0, 0, 0.8)",
                     WebkitBoxReflect: index === activeIndex ? 
                       "below 0.5vmin linear-gradient(transparent 0 70%, rgba(0,0,0,0.1) 85%, rgba(0,0,0,0.3) 100%)" :
@@ -220,13 +209,13 @@ export default function JudgesSection() {
                   
                   {/* Judge Info Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6">
-                    <h3 className="text-2xl font-bold text-white">{judge.name}</h3>
+                    <h3 className="text-2xl font-bold text-white font-heading">{judge.name}</h3>
                     <p className="text-purple-300 text-lg">{judge.role}</p>
                     <a 
                       href={judge.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 mt-2 text-blue-400 hover:text-blue-300 transition-colors"
+                      className="inline-flex items-center gap-2 mt-2 text-purple-400 hover:text-purple-300 transition-colors"
                     >
                       <Linkedin className="w-5 h-5" />
                       <span className="text-sm">View Profile</span>
@@ -242,14 +231,14 @@ export default function JudgesSection() {
         <div className="flex justify-center mt-8 md:mt-12 gap-12 md:gap-16 items-center">
           <button
             onClick={prevJudge}
-            className="flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-purple-900/60 hover:bg-purple-700/70 transition-colors border border-purple-500/50"
+            className="flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-purple-900/60 hover:bg-purple-800/80 transition-colors border border-purple-700/50 void-pulse"
             aria-label="Previous judge"
           >
             <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
           </button>
           <button
             onClick={nextJudge}
-            className="flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-purple-900/60 hover:bg-purple-700/70 transition-colors border border-purple-500/50"
+            className="flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-purple-900/60 hover:bg-purple-800/80 transition-colors border border-purple-700/50 void-pulse"
             aria-label="Next judge"
           >
             <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
@@ -279,9 +268,9 @@ export default function JudgesSection() {
           pointer-events: none;
           position: absolute;
           --w: 2px;
-          --g: #fff0, rgba(168, 85, 247, 0.8) 50%, rgba(168, 85, 247, 0.8) 50%, #fff0;
+          --g: #fff0, rgba(147, 51, 234, 0.8) 50%, rgba(147, 51, 234, 0.8) 50%, #fff0;
           z-index: 30;
-          filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.5));
+          filter: drop-shadow(0 0 5px rgba(147, 51, 234, 0.5));
         }
 
         .a::before {
@@ -311,57 +300,57 @@ export default function JudgesSection() {
         .l {
           left: 0;
           background: linear-gradient(to bottom, 
-            rgba(168, 85, 247, 0) 0%, 
-            rgba(168, 85, 247, 1) 15%, 
-            rgba(168, 85, 247, 1) 85%, 
-            rgba(168, 85, 247, 0) 100%
+            rgba(147, 51, 234, 0) 0%, 
+            rgba(147, 51, 234, 1) 15%, 
+            rgba(147, 51, 234, 1) 85%, 
+            rgba(147, 51, 234, 0) 100%
           );
           top: 0;
           bottom: 0;
           width: var(--w);
-          box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+          box-shadow: 0 0 15px rgba(147, 51, 234, 0.5);
         }
 
         .r {
           right: 0;
           background: linear-gradient(to bottom, 
-            rgba(168, 85, 247, 0) 0%, 
-            rgba(168, 85, 247, 1) 15%, 
-            rgba(168, 85, 247, 1) 85%, 
-            rgba(168, 85, 247, 0) 100%
+            rgba(147, 51, 234, 0) 0%, 
+            rgba(147, 51, 234, 1) 15%, 
+            rgba(147, 51, 234, 1) 85%, 
+            rgba(147, 51, 234, 0) 100%
           );
           top: 0;
           bottom: 0;
           width: var(--w);
-          box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+          box-shadow: 0 0 15px rgba(147, 51, 234, 0.5);
         }
 
         .t {
           top: 0;
           background: linear-gradient(to right, 
-            rgba(168, 85, 247, 0) 0%, 
-            rgba(168, 85, 247, 1) 15%, 
-            rgba(168, 85, 247, 1) 85%, 
-            rgba(168, 85, 247, 0) 100%
+            rgba(147, 51, 234, 0) 0%, 
+            rgba(147, 51, 234, 1) 15%, 
+            rgba(147, 51, 234, 1) 85%, 
+            rgba(147, 51, 234, 0) 100%
           );
           left: 0;
           right: 0;
           height: var(--w);
-          box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+          box-shadow: 0 0 15px rgba(147, 51, 234, 0.5);
         }
 
         .b {
           bottom: 0;
           background: linear-gradient(to right, 
-            rgba(168, 85, 247, 0) 0%, 
-            rgba(168, 85, 247, 1) 15%, 
-            rgba(168, 85, 247, 1) 85%, 
-            rgba(168, 85, 247, 0) 100%
+            rgba(147, 51, 234, 0) 0%, 
+            rgba(147, 51, 234, 1) 15%, 
+            rgba(147, 51, 234, 1) 85%, 
+            rgba(147, 51, 234, 0) 100%
           );
           left: 0;
           right: 0;
           height: var(--w);
-          box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+          box-shadow: 0 0 15px rgba(147, 51, 234, 0.5);
         }
 
         .card-container {
@@ -372,8 +361,12 @@ export default function JudgesSection() {
           border-radius: 0 !important;
         }
 
+        .active-card .card-container {
+          box-shadow: 0 0 30px rgba(147, 51, 234, 0.4);
+        }
+
         .card-container:hover {
-          box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+          box-shadow: 0 0 25px rgba(147, 51, 234, 0.5);
         }
       `}</style>
     </section>

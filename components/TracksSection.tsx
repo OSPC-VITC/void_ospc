@@ -27,45 +27,39 @@ type Track = TrackWithSingleImage | TrackWithDualImages;
 export default function TracksSection() {
   const tracks: Track[] = [
     {
-      title: "Blockchain & Decentralized Solutions",
-      description: "Foster entrepreneurship through blockchain-driven, secure, and transparent business solutions.",
-      outcome: "Innovative solutions in finance, governance, and digital security.",
-      image: "/tracks/block.jpg"
+      title: "FinTech & Digital Payments",
+      description: "Foster innovation in financial technologies and digital payment solutions to revolutionize how we transact in the digital world.",
+      outcome: "Cutting-edge payment systems, blockchain solutions, and financial management tools.",
+      image: "/tracks/fintech.jpg"
     },
     {
-      title: "AgriTech & MedTech",
-      description: "Encourage entrepreneurial innovation in agriculture and healthcare using AI and IoT.",
-      outcome: "Enhanced food security, precision farming, and accessible healthcare.",
+      title: "HealthTech & EdTech",
+      description: "Create revolutionary solutions for healthcare and education challenges using AI, data analytics, and immersive technologies.",
+      outcome: "Advanced health monitoring systems, virtual learning platforms, and accessibility tools.",
+      images: {
+        left: "/tracks/health.jpg",
+        right: "/tracks/ed.avif"
+      }
+    },
+    {
+      title: "RetailTech | SaaS | Smart Mobility",
+      description: "Enhance retail experiences, develop scalable software solutions, and reimagine transportation for a connected world.",
+      outcome: "Immersive shopping platforms, enterprise solutions, and intelligent transport systems.",
+      image: "/tracks/retail.jpg"
+    },
+    {
+      title: "AgriTech & SDG",
+      description: "Develop innovative agricultural solutions aligned with Sustainable Development Goals to address global challenges.",
+      outcome: "Smart farming systems, sustainable resource management, and climate-responsive technologies.",
       images: {
         left: "/tracks/agri.jpg",
-        right: "/tracks/med.png"
+        right: "/tracks/sust.webp"
       }
-    },
-    {
-      title: "EdTech & Smart Learning",
-      description: "Promote entrepreneurship in education through AI-driven and adaptive learning technologies.",
-      outcome: "Improved learning accessibility, engagement, and skill development.",
-      image: "/tracks/ed.avif"
-    },
-    {
-      title: "Sustainability & Social Well-Being",
-      description: "Inspire entrepreneurship for sustainability-focused and socially impactful tech solutions.",
-      outcome: "Advancements in environmental conservation, clean energy, and social well-being.",
-      images: {
-        left: "/tracks/sust.webp",
-        right: "/tracks/soc.jpg"
-      }
-    },
-    {
-      title: "IoT & Smart Technologies",
-      description: "Enable entrepreneurship in smart tech through AI-powered, connected, and intelligent devices.",
-      outcome: "Smarter automation, predictive analytics, and efficient infrastructure.",
-      image: "/tracks/iot.jpg"
     },
     {
       title: "Open Innovation",
-      description: "Cultivate an entrepreneurial mindset for groundbreaking, cross-domain tech innovations.",
-      outcome: "Disruptive solutions addressing real-world challenges creatively.",
+      description: "Cultivate an entrepreneurial mindset for groundbreaking, cross-domain tech innovations outside conventional categories.",
+      outcome: "Disruptive solutions addressing real-world challenges through creative interdisciplinary approaches.",
       image: "/tracks/open.jpg"
     },
   ];
@@ -87,13 +81,13 @@ export default function TracksSection() {
     expanded: (i: number) => ({
       flex: i === activeIndex ? 10 : 1,
       transition: {
-        flex: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
+        flex: { duration: 0.4, ease: "easeInOut" }
       }
     }),
     collapsed: { 
       flex: 1,
       transition: {
-        flex: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
+        flex: { duration: 0.4, ease: "easeInOut" }
       }
     }
   };
@@ -103,7 +97,7 @@ export default function TracksSection() {
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
+      transition: { duration: 0.4, ease: "easeOut" }
     }
   };
 
@@ -113,14 +107,14 @@ export default function TracksSection() {
       rotate: 180,
       x: "0%",
       textAlign: "center" as const,
-      transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
+      transition: { duration: 0.3, ease: "easeInOut" }
     },
     horizontal: { 
       writingMode: "horizontal-tb" as const,
       rotate: 0,
       x: "0%",
       textAlign: "left" as const,
-      transition: { duration: 0.3, ease: [0.4, 0, 0.2, 1] }
+      transition: { duration: 0.3, ease: "easeInOut" }
     }
   };
 
@@ -134,11 +128,11 @@ export default function TracksSection() {
           className="text-center mb-16"
         >
           <h2 className="mb-6 text-center font-bold tracking-wider leading-tight" style={{ fontSize: "clamp(40px, 10vw, 70px)" }}>
-            <span className="text-white">SPECTRUM </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">TRACKS</span>
+            <span className="text-white">VOID </span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-violet-700">TRACKS</span>
           </h2>
           <motion.div 
-            className="h-1 w-32 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-10 rounded-full"
+            className="h-1 w-32 bg-gradient-to-r from-purple-600 to-violet-800 mx-auto mb-10 rounded-full"
             initial={{ width: 0, opacity: 0 }}
             animate={{ width: "8rem", opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -150,7 +144,7 @@ export default function TracksSection() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="hidden sm:flex h-[450px] gap-2 max-w-[95vw] lg:max-w-6xl mx-auto"
+          className="hidden sm:flex h-[450px] gap-3 max-w-[95vw] lg:max-w-6xl mx-auto"
         >
           {tracks.map((track, index) => (
             <motion.div
@@ -159,10 +153,11 @@ export default function TracksSection() {
               variants={trackVariants}
               initial="collapsed"
               animate="expanded"
-              className="relative overflow-hidden bg-[#111] flex-1 cursor-pointer track-container"
+              className="relative overflow-hidden bg-black/40 flex-1 cursor-pointer track-container void-border"
               style={{ flexGrow: index === activeIndex ? 10 : 1 }}
               onClick={() => setActiveIndex(index)}
               onMouseEnter={() => setActiveIndex(index)}
+              whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}
             >
               <div className="a l"></div>
               <div className="a r"></div>
@@ -179,10 +174,10 @@ export default function TracksSection() {
                       fill
                       className="object-cover"
                       style={{
-                        opacity: index === activeIndex ? 0.9 : 0.7,
-                        filter: index === activeIndex ? 'brightness(0.9)' : 'brightness(0.7)',
-                        objectPosition: track.title === "AgriTech & MedTech" ? '85% center' : 
-                                       track.title === "Sustainability & Social Well-Being" ? 'center center' : 'center'
+                        opacity: index === activeIndex ? 0.5 : 0.3,
+                        filter: index === activeIndex ? 'brightness(0.7) hue-rotate(240deg)' : 'brightness(0.5) hue-rotate(240deg)',
+                        objectPosition: track.title === "HealthTech & EdTech" ? '85% center' : 
+                                       track.title === "AgriTech & SDG" ? 'center center' : 'center'
                       }}
                       mobileQuality={60}
                       desktopQuality={85}
@@ -196,10 +191,10 @@ export default function TracksSection() {
                       fill
                       className="object-cover"
                       style={{
-                        opacity: index === activeIndex ? 0.9 : 0.7,
-                        filter: index === activeIndex ? 'brightness(0.9)' : 'brightness(0.7)',
-                        objectPosition: track.title === "AgriTech & MedTech" ? '95% center' : 
-                                     track.title === "Sustainability & Social Well-Being" ? 'center center' : 'center'
+                        opacity: index === activeIndex ? 0.5 : 0.3,
+                        filter: index === activeIndex ? 'brightness(0.7) hue-rotate(240deg)' : 'brightness(0.5) hue-rotate(240deg)',
+                        objectPosition: track.title === "HealthTech & EdTech" ? '95% center' : 
+                                     track.title === "AgriTech & SDG" ? 'center center' : 'center'
                       }}
                       mobileQuality={60}
                       desktopQuality={85}
@@ -214,8 +209,8 @@ export default function TracksSection() {
                   fill
                   className="absolute inset-0 object-cover w-full h-full"
                   style={{
-                    opacity: index === activeIndex ? 0.9 : 0.7,
-                    filter: index === activeIndex ? 'brightness(0.9)' : 'brightness(0.7)'
+                    opacity: index === activeIndex ? 0.5 : 0.3,
+                    filter: index === activeIndex ? 'brightness(0.7) hue-rotate(240deg)' : 'brightness(0.5) hue-rotate(240deg)'
                   }}
                   mobileQuality={60}
                   desktopQuality={85}
@@ -228,8 +223,8 @@ export default function TracksSection() {
                 className="absolute inset-0 z-10 pointer-events-none"
                 style={{
                   background: index === activeIndex 
-                    ? 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.5) 100%)'
-                    : 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%)'
+                    ? 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(76, 29, 149, 0.3) 30%, rgba(76, 29, 149, 0.3) 70%, rgba(0,0,0,0.7) 100%)'
+                    : 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(76, 29, 149, 0.2) 100%)'
                 }}
               ></div>
 
@@ -242,9 +237,9 @@ export default function TracksSection() {
                   variants={titleVariants}
                   initial="vertical"
                   animate={index === activeIndex ? "horizontal" : "vertical"}
-                  className="font-['Megrim'] text-sm md:text-lg uppercase tracking-wider font-medium text-white mb-2"
+                  className="font-heading text-sm md:text-lg uppercase tracking-wider font-medium text-white mb-2"
                   style={{
-                    textShadow: '0 0 15px rgba(255, 255, 255, 0.5), 0 2px 5px rgba(0, 0, 0, 0.9)'
+                    textShadow: '0 0 15px rgba(138, 43, 226, 0.8), 0 2px 5px rgba(0, 0, 0, 0.9)'
                   }}
                 >
                   {track.title}
@@ -259,7 +254,7 @@ export default function TracksSection() {
                       exit={{ opacity: 0, y: 10, transition: { duration: 0.2 } }}
                       className="mt-auto"
                     >
-                      <Badge className="bg-purple-600/80 hover:bg-purple-600 mb-3">Track {index + 1}</Badge>
+                      <Badge className="bg-purple-700/80 hover:bg-purple-700 mb-3">Track {index + 1}</Badge>
                       <p className="text-sm leading-tight text-gray-200 mb-3">{track.description}</p>
                       <p className="text-sm leading-tight text-purple-300">
                         <span className="font-semibold">Outcome:</span> {track.outcome}
@@ -284,7 +279,7 @@ export default function TracksSection() {
                 height: index === activeIndex ? 400 : 70 
               }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="track-container bg-[#111] overflow-hidden relative cursor-pointer"
+              className="track-container bg-black/40 overflow-hidden relative cursor-pointer void-border"
               onClick={() => setActiveIndex(index)}
             >
               <div className="a l"></div>
@@ -295,9 +290,9 @@ export default function TracksSection() {
               {/* Content layer */}
               <div className="relative z-10 p-6 flex flex-col h-full">
                 {/* Title always at top */}
-                <h3 className="font-['Megrim'] text-base sm:text-lg uppercase tracking-wider font-medium text-white mb-2"
+                <h3 className="font-heading text-base sm:text-lg uppercase tracking-wider font-medium text-white mb-2"
                   style={{
-                    textShadow: '0 0 15px rgba(255, 255, 255, 0.5), 0 2px 5px rgba(0, 0, 0, 0.9)'
+                    textShadow: '0 0 15px rgba(138, 43, 226, 0.8), 0 2px 5px rgba(0, 0, 0, 0.9)'
                   }}
                 >
                   {track.title}
@@ -315,7 +310,7 @@ export default function TracksSection() {
                     >
                       {/* All content at bottom */}
                       <div className="mt-auto">
-                        <Badge className="bg-purple-600/80 hover:bg-purple-600 w-fit mb-3">Track {index + 1}</Badge>
+                        <Badge className="bg-purple-700/80 hover:bg-purple-700 w-fit mb-3">Track {index + 1}</Badge>
                         <p className="text-sm leading-tight text-gray-200 mb-3">{track.description}</p>
                         <p className="text-sm leading-tight text-purple-300">
                           <span className="font-semibold">Outcome:</span> {track.outcome}
@@ -337,9 +332,9 @@ export default function TracksSection() {
                         fill
                         className="object-cover"
                         style={{
-                          opacity: index === activeIndex ? 0.9 : 0.7,
-                          filter: index === activeIndex ? 'brightness(0.8)' : 'brightness(0.7)',
-                          objectPosition: track.title === "AgriTech & MedTech" ? '80% center' : 'center'
+                          opacity: index === activeIndex ? 0.5 : 0.3,
+                          filter: index === activeIndex ? 'brightness(0.7) hue-rotate(240deg)' : 'brightness(0.5) hue-rotate(240deg)',
+                          objectPosition: track.title === "HealthTech & EdTech" ? '80% center' : 'center'
                         }}
                         mobileQuality={60}
                         desktopQuality={85}
@@ -352,9 +347,9 @@ export default function TracksSection() {
                         fill
                         className="object-cover"
                         style={{
-                          opacity: index === activeIndex ? 0.9 : 0.7,
-                          filter: index === activeIndex ? 'brightness(0.8)' : 'brightness(0.7)',
-                          objectPosition: track.title === "AgriTech & MedTech" ? '95% center' : 'center'
+                          opacity: index === activeIndex ? 0.5 : 0.3,
+                          filter: index === activeIndex ? 'brightness(0.7) hue-rotate(240deg)' : 'brightness(0.5) hue-rotate(240deg)',
+                          objectPosition: track.title === "HealthTech & EdTech" ? '95% center' : 'center'
                         }}
                         mobileQuality={60}
                         desktopQuality={85}
@@ -368,9 +363,9 @@ export default function TracksSection() {
                     fill
                     className="object-cover"
                     style={{
-                      opacity: index === activeIndex ? 0.9 : 0.7,
-                      filter: index === activeIndex ? 'brightness(0.8)' : 'brightness(0.7)',
-                      objectPosition: track.title === "IoT & Smart Technologies" ? '65% center' : 'center'
+                      opacity: index === activeIndex ? 0.5 : 0.3,
+                      filter: index === activeIndex ? 'brightness(0.7) hue-rotate(240deg)' : 'brightness(0.5) hue-rotate(240deg)',
+                      objectPosition: track.title === "RetailTech | SaaS | Smart Mobility" ? '65% center' : 'center'
                     }}
                     mobileQuality={60}
                     desktopQuality={85}
@@ -382,8 +377,8 @@ export default function TracksSection() {
                   className="absolute inset-0" 
                   style={{
                     background: index === activeIndex
-                      ? 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%)'
-                      : 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.6) 100%)'
+                      ? 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(76, 29, 149, 0.3) 30%, rgba(76, 29, 149, 0.3) 70%, rgba(0,0,0,0.7) 100%)'
+                      : 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(76, 29, 149, 0.2) 100%)'
                   }}
                 ></div>
               </div>
@@ -444,8 +439,8 @@ export default function TracksSection() {
           --t: -20px;
           --s: calc(var(--t) * -1);
           --e: calc(100% + var(--t));
-          --g: #fff0, #fff5 var(--s), #fffc var(--s), #fff, #fffc var(--e),
-            #fff5 var(--e), #fff0;
+          --g: #fff0, #9333EA40 var(--s), #9333EA80 var(--s), #9333EA, #9333EA80 var(--e),
+            #9333EA40 var(--e), #fff0;
           z-index: 30;
         }
 

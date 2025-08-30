@@ -22,17 +22,6 @@ interface Organizer {
   };
 }
 
-interface Partner {
-  id: number;
-  name: string;
-  role: string;
-  bio: string;
-  imageUrl: string;
-  socialLinks: {
-    website?: string;
-  };
-}
-
 const organizers: Organizer[] = [
   {
     id: 1,
@@ -49,38 +38,15 @@ const organizers: Organizer[] = [
   },
   {
     id: 2,
-    name: "CSED",
+    name: "BIC",
     role: "Co-Organizer",
-    bio: "The Centre for Social Entrepreneurship and Development (CSED) at VIT Chennai cultivates entrepreneurial leadership through social innovation, networking, and transformative learning. With dynamic events, workshops, and competitions, CSED empowers members to create sustainable impact.",
+    bio: "Business Incubation Center at VIT Chennai fosters innovation and entrepreneurship, providing resources and mentorship for student startups to thrive in the competitive business landscape.",
     imageUrl: "/csed.png",
     socialLinks: {
       twitter: "https://twitter.com/vitchennai",
       linkedin: "https://linkedin.com/school/vit-chennai"
     }
   },
-];
-
-const partners: Partner[] = [
-  {
-    id: 3,
-    name: "Vertex Innovate",
-    role: "Community Partner",
-    bio: "Vertex Innovate is an EdTech entertainment platform connecting students across colleges, fostering collaboration, and bridging academia with industry—making learning fun and interactive!",
-    imageUrl: "/vertex.png",
-    socialLinks: {
-      website: "https://www.instagram.com/vertex_innovate/"
-    }
-  },
-  {
-    id: 4,
-    name: "IBM Z Community",
-    role: "Technology Partner",
-    bio: "IBM Z Community VIT Chennai unites tech enthusiasts to explore enterprise computing. We empower students through cutting-edge tech, challenges and industry mentorship.",
-    imageUrl: "/IBMz.jpg",
-    socialLinks: {
-      website: "https://www.instagram.com/ibmzcommunity.vitc"
-    }
-  }
 ];
 
 const OrganisersSection: React.FC = () => {
@@ -95,17 +61,17 @@ const OrganisersSection: React.FC = () => {
           
           
           <h2 className="mb-10 text-center font-bold tracking-wider leading-tight" style={{ fontSize: "clamp(40px, 10vw, 70px)" }}>
-            <span className="text-white">MEET OUR </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">ORGANISERS</span>
+            <span className="text-white">VOID </span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-violet-700">ORGANISERS</span>
           </h2>
           <motion.div 
-            className="h-1 w-32 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-10 rounded-full"
+            className="h-1 w-32 bg-gradient-to-r from-purple-600 to-violet-800 mx-auto mb-10 rounded-full"
             initial={{ width: 0, opacity: 0 }}
             animate={{ width: "8rem", opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           />
           <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-            SPECTRUM is powered by OSPC x CSED, with Vertex Innovate as our community partner, bringing together the best minds to create an electrifying innovation battlefield.
+            VOID is powered by OSPC x BIC, bringing together the best minds to create an electrifying innovation battlefield in the digital realm.
           </p>
         </motion.div>
 
@@ -140,7 +106,7 @@ const OrganisersSection: React.FC = () => {
                   
                   <div className="space-y-3">
                     <div className="space-y-2">
-                      <h3 className="text-3xl font-bold text-white tracking-wide">{organizer.name}</h3>
+                      <h3 className="text-3xl font-bold text-white tracking-wide font-heading">{organizer.name}</h3>
                       <p className="text-purple-400 font-medium text-lg">{organizer.role}</p>
                       <p className="text-gray-300 leading-relaxed text-base">{organizer.bio}</p>
                     </div>
@@ -161,79 +127,6 @@ const OrganisersSection: React.FC = () => {
                           {platform === 'website' && <GlobeIcon className="h-6 w-6" />}
                         </a>
                       ))}
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16 space-y-6"
-        >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl mb-6 text-center font-bold tracking-wider leading-tight">
-            <span className="text-white">OUR </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">PARTNERS</span>
-          </h2>
-          <motion.div 
-            className="h-1 w-32 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-10 rounded-full"
-            initial={{ width: 0, opacity: 0 }}
-            animate={{ width: "8rem", opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          />
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto px-3">
-          {partners.map((partner) => (
-            <motion.div
-              key={partner.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="glow-wrapper w-full"
-            >
-              <Card className="relative h-full bg-black/20 hover:bg-black/30 transition-colors overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-purple-500/20 card-container !rounded-none">
-                <div className="a l"></div>
-                <div className="a r"></div>
-                <div className="a t"></div>
-                <div className="a b"></div>
-                <div className="p-4 space-y-3">
-                  <div className="relative h-36 w-full flex items-center justify-center">
-                    <div className="relative w-[95%] h-full">
-                      <Image
-                        src={partner.imageUrl}
-                        alt={partner.name}
-                        fill
-                        className="object-contain brightness-200"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        priority
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <div className="space-y-1">
-                      <h3 className="text-xl font-bold text-white tracking-wide text-center">{partner.name}</h3>
-                      <p className="text-purple-400 font-medium text-sm text-center">{partner.role}</p>
-                      <p className="text-gray-300 leading-relaxed text-xs text-center">{partner.bio}</p>
-                    </div>
-
-                    <div className="flex justify-center mt-1">
-                      {partner.socialLinks.website && (
-                        <a
-                          href={partner.socialLinks.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-purple-400 hover:text-purple-300 transition-colors"
-                        >
-                          <span className="sr-only">Instagram</span>
-                          <InstagramLogoIcon className="h-5 w-5" />
-                        </a>
-                      )}
                     </div>
                   </div>
                 </div>
@@ -272,14 +165,14 @@ const OrganisersSection: React.FC = () => {
         .card-container {
           position: relative;
           transition: all 0.3s ease;
-          background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(0, 0, 0, 0.4));
+          background: linear-gradient(135deg, rgba(76, 29, 149, 0.15), rgba(0, 0, 0, 0.4));
         }
 
         .card-container::before {
           content: '';
           position: absolute;
           inset: 0;
-          background: radial-gradient(circle at center, rgba(168, 85, 247, 0.2), transparent 70%);
+          background: radial-gradient(circle at center, rgba(76, 29, 149, 0.2), transparent 70%);
           pointer-events: none;
         }
 
@@ -287,9 +180,9 @@ const OrganisersSection: React.FC = () => {
           pointer-events: none;
           position: absolute;
           --w: 2px;
-          --g: #fff0, #fff 50%, #fff 50%, #fff0;
+          --g: #fff0, #9333EA 50%, #9333EA 50%, #fff0;
           z-index: 30;
-          filter: drop-shadow(0 0 5px rgba(168, 85, 247, 1));
+          filter: drop-shadow(0 0 5px rgba(147, 51, 234, 1));
         }
 
         .a::before {
@@ -320,56 +213,56 @@ const OrganisersSection: React.FC = () => {
           left: 0;
           background: linear-gradient(to bottom, 
             #fff0 0%, 
-            #fff 15%, 
-            #fff 85%, 
+            #9333EA 15%, 
+            #9333EA 85%, 
             #fff0 100%
           );
           top: 0;
           bottom: 0;
           width: var(--w);
-          box-shadow: 0 0 15px 2px rgba(168, 85, 247, 0.8);
+          box-shadow: 0 0 15px 2px rgba(147, 51, 234, 0.8);
         }
 
         .r {
           right: 0;
           background: linear-gradient(to bottom, 
             #fff0 0%, 
-            #fff 15%, 
-            #fff 85%, 
+            #9333EA 15%, 
+            #9333EA 85%, 
             #fff0 100%
           );
           top: 0;
           bottom: 0;
           width: var(--w);
-          box-shadow: 0 0 15px 2px rgba(168, 85, 247, 0.8);
+          box-shadow: 0 0 15px 2px rgba(147, 51, 234, 0.8);
         }
 
         .t {
           top: 0;
           background: linear-gradient(to right, 
             #fff0 0%, 
-            #fff 15%, 
-            #fff 85%, 
+            #9333EA 15%, 
+            #9333EA 85%, 
             #fff0 100%
           );
           left: 0;
           right: 0;
           height: var(--w);
-          box-shadow: 0 0 15px 2px rgba(168, 85, 247, 0.8);
+          box-shadow: 0 0 15px 2px rgba(147, 51, 234, 0.8);
         }
 
         .b {
           bottom: 0;
           background: linear-gradient(to right, 
             #fff0 0%, 
-            #fff 15%, 
-            #fff 85%, 
+            #9333EA 15%, 
+            #9333EA 85%, 
             #fff0 100%
           );
           left: 0;
           right: 0;
           height: var(--w);
-          box-shadow: 0 0 15px 2px rgba(168, 85, 247, 0.8);
+          box-shadow: 0 0 15px 2px rgba(147, 51, 234, 0.8);
         }
 
         .card-container {
@@ -381,22 +274,22 @@ const OrganisersSection: React.FC = () => {
         }
 
         .card-container:hover {
-          box-shadow: 0 0 40px rgba(168, 85, 247, 0.5);
+          box-shadow: 0 0 40px rgba(147, 51, 234, 0.5);
         }
 
         .card-container:hover .a {
-          filter: drop-shadow(0 0 8px rgba(168, 85, 247, 1));
+          filter: drop-shadow(0 0 8px rgba(147, 51, 234, 1));
         }
 
         .card-container:hover .l,
         .card-container:hover .r,
         .card-container:hover .t,
         .card-container:hover .b {
-          box-shadow: 0 0 20px 3px rgba(168, 85, 247, 1);
+          box-shadow: 0 0 20px 3px rgba(147, 51, 234, 1);
         }
 
         .card-container:hover::before {
-          box-shadow: 0 0 45px 10px rgba(168, 85, 247, 0.5);
+          box-shadow: 0 0 45px 10px rgba(147, 51, 234, 0.5);
         }
       `}</style>
     </section>
