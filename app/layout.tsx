@@ -5,6 +5,7 @@ import { Orbitron, Space_Grotesk } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/components/Navbar"
 import AnimatedDots from "@/components/AnimatedDots"
+import LoadingOverlay from "@/components/LoadingOverlay"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,6 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} ${spaceGrotesk.variable} antialiased font-theme`}>
+        <LoadingOverlay />
         <AnimatedDots/>
         <Navbar />
         <main className="pt-16 font-theme">{children}</main>

@@ -73,7 +73,7 @@ export function OptimizedImage({
       window.innerWidth < 768 || 
       'ontouchstart' in window || 
       navigator.maxTouchPoints > 0;
-    setIsMobile(isMobileDevice);
+      setIsMobile(isMobileDevice);
     
     // Add debounced resize listener
     const handleResize = debouncedCheckMobile();

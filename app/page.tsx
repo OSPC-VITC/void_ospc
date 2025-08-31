@@ -18,6 +18,7 @@ import { OptimizedImage } from "@/components/ui/optimized-image"
 import * as THREE from 'three'
 import { useFrame, Canvas } from '@react-three/fiber'
 import { MeshDistortMaterial, AdaptiveDpr, Environment, useGLTF } from '@react-three/drei'
+import React from "react"
 
 // Memoized VoidSphere component to prevent unnecessary re-renders
 const VoidSphere = memo(function VoidSphere() {
@@ -58,20 +59,27 @@ const VoidSphere = memo(function VoidSphere() {
 export default function HomePage() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
-  const handleMouseEnter = () => {
-    if (videoRef.current) {
-      videoRef.current.play().catch((error) => {
-        console.error("Error playing video:", error)
-      })
-    }
-  }
+  // Autoplay video only when scrolled into view
+  React.useEffect(() => {
+    if (!videoRef.current || typeof window === 'undefined') return
+    const el = videoRef.current
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!el) return
+          if (entry.isIntersecting) {
+            el.play().catch(() => {})
+          } else {
+            el.pause()
+          }
+        })
+      },
+      { threshold: 0.35 }
+    )
 
-  const handleMouseLeave = () => {
-    if (videoRef.current) {
-      videoRef.current.pause()
-      videoRef.current.currentTime = 0
-    }
-  }
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   // Memoize the Canvas settings to prevent unnecessary re-renders
   const canvasSettings = useMemo(() => ({
@@ -155,7 +163,7 @@ export default function HomePage() {
           <EventHorizon />
         </div>
 
-        <HeroScrollDemo/>
+        {/* <HeroScrollDemo/> */}
         <AboutSection/>
         <TracksSection/>
         <PrizesSection/>
