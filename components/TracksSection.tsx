@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { OptimizedImage } from './ui/optimized-image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, easeInOut, easeOut } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 
@@ -80,15 +80,11 @@ export default function TracksSection() {
   const trackVariants = {
     expanded: (i: number) => ({
       flex: i === activeIndex ? 10 : 1,
-      transition: {
-        flex: { duration: 0.4, ease: "easeInOut" }
-      }
+      transition: { duration: 0.4, ease: easeInOut }
     }),
     collapsed: { 
       flex: 1,
-      transition: {
-        flex: { duration: 0.4, ease: "easeInOut" }
-      }
+      transition: { duration: 0.4, ease: easeInOut }
     }
   };
 
@@ -97,7 +93,7 @@ export default function TracksSection() {
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.4, ease: "easeOut" }
+      transition: { duration: 0.4, ease: easeOut }
     }
   };
 
@@ -107,14 +103,14 @@ export default function TracksSection() {
       rotate: 180,
       x: "0%",
       textAlign: "center" as const,
-      transition: { duration: 0.3, ease: "easeInOut" }
+      transition: { duration: 0.3, ease: easeInOut }
     },
     horizontal: { 
       writingMode: "horizontal-tb" as const,
       rotate: 0,
       x: "0%",
       textAlign: "left" as const,
-      transition: { duration: 0.3, ease: "easeInOut" }
+      transition: { duration: 0.3, ease: easeInOut }
     }
   };
 
@@ -498,6 +494,12 @@ export default function TracksSection() {
           left: var(--t);
           right: var(--t);
           height: var(--w);
+        }
+      `}</style>
+      <style jsx>{`
+        /* Disable rotating border animation only within the Tracks section */
+        :global(#tracks .void-border::before) {
+          animation: none !important;
         }
       `}</style>
     </section>

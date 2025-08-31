@@ -49,12 +49,12 @@ export default function PrizesSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 max-w-5xl mx-auto">
           {/* First Prize Box */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="group"
-          >
+          > */}
             <motion.div
               whileHover={{ y: -5, boxShadow: "0 0 0 0 transparent" }}
             >
@@ -78,7 +78,7 @@ export default function PrizesSection() {
                 </CardContent>
               </Card>
             </motion.div>
-          </motion.div>
+          {/* </motion.div> */}
 
           {/* Second Prize Box */}
           <motion.div
@@ -160,6 +160,12 @@ export default function PrizesSection() {
           </Card>
         </motion.div>
       </div>
+      <style jsx>{`
+        /* Disable rotating border animation only within the Prizes section */
+        :global(#prizes .void-border::before) {
+          animation: none !important;
+        }
+      `}</style>
     </section>
   );
 }

@@ -174,7 +174,7 @@
   font-family: inherit;
 }
 
-/* Updated void animations */
+/* Updated void animations with performance optimizations */
 @keyframes void-drift {
   0%,
   100% {
@@ -264,14 +264,19 @@
 
 .void-drift {
   animation: void-drift 6s ease-in-out infinite;
+  will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .void-pulse {
   animation: void-pulse 4s ease-in-out infinite;
+  will-change: box-shadow;
 }
 
 .void-logo-pulse {
   animation: void-logo-glow 4s ease-in-out infinite;
+  will-change: filter;
 }
 
 .void-glitch {
@@ -286,6 +291,9 @@
   left: 0;
   width: 100%;
   height: 100%;
+  will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .void-glitch::before {
@@ -302,19 +310,29 @@
 
 .void-particle {
   animation: void-particle-float 8s ease-in-out infinite;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 /* For legacy references */
 .cosmic-drift {
   animation: void-drift 6s ease-in-out infinite;
+  will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .cosmic-glow {
   animation: void-pulse 4s ease-in-out infinite;
+  will-change: box-shadow;
 }
 
 .cosmic-particle {
   animation: void-particle-float 8s ease-in-out infinite;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 @font-face {
@@ -332,6 +350,7 @@
 .void-border {
   position: relative;
   overflow: hidden;
+  transform: translateZ(0); /* Force hardware acceleration */
 }
 
 .void-border::before {
@@ -348,6 +367,9 @@
   );
   animation: rotate 3s linear infinite;
   z-index: -1;
+  will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 /* New styles for the hero section */
@@ -357,6 +379,7 @@
   width: 100%;
   max-width: 500px;
   height: 500px;
+  transform: translateZ(0); /* Force hardware acceleration */
 }
 
 .hero-logo-overlay {

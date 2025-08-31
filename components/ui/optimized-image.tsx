@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import Image, { ImageProps } from 'next/image';
 
 interface OptimizedImageProps extends Omit<ImageProps, 'quality' | 'loading' | 'alt'> {
@@ -13,7 +13,6 @@ interface OptimizedImageProps extends Omit<ImageProps, 'quality' | 'loading' | '
   alt?: string;
 }
 
-// eslint-disable-next-line jsx-a11y/alt-text
 export function OptimizedImage({ 
   desktopQuality = 85,
   mobileQuality = 65, 
@@ -33,43 +32,84 @@ export function OptimizedImage({
   // Otherwise use the provided loading value or default to 'lazy'
   const loadingValue = priority ? undefined : (loading || 'lazy');
 
-  useEffect(() => {
-    setIsClient(true);
-    const checkMobile = () => {
-      const isMobileDevice = window.innerWidth < 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      setIsMobile(isMobileDevice);
+  // Debounced resize handler for better performance
+  const debouncedCheckMobile = useCallback(() => {
+    let timeoutId: NodeJS.Timeout | null = null;
+    
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      
+      timeoutId = setTimeout(() => {
+        const isMobileDevice = 
+          typeof window !== 'undefined' && 
+          (window.innerWidth < 768 || 
+           'ontouchstart' in window || 
+           navigator.maxTouchPoints > 0);
+        setIsMobile(isMobileDevice);
+        timeoutId = null;
+      }, 100);
     };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Memoize quality and sizes based on device type
+  const quality = useMemo(() => 
+    isMobile ? mobileQuality : desktopQuality, 
+    [isMobile, mobileQuality, desktopQuality]
+  );
+
+  const sizeValue = useMemo(() => 
+    sizes || (isMobile ? mobileSizes : desktopSizes), 
+    [sizes, isMobile, mobileSizes, desktopSizes]
+  );
+
+  useEffect(() => {
+    // Set initial client state
+    setIsClient(true);
+    
+    // Initial mobile check
+    const isMobileDevice = 
+      window.innerWidth < 768 || 
+      'ontouchstart' in window || 
+      navigator.maxTouchPoints > 0;
+    setIsMobile(isMobileDevice);
+    
+    // Add debounced resize listener
+    const handleResize = debouncedCheckMobile();
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [debouncedCheckMobile]);
+
+  // Common props for both SSR and client renders
+  const imageProps = {
+    ...props,
+    alt,
+    priority,
+    loading: loadingValue
+  };
 
   // Server-side rendering or initial render
   if (!isClient) {
     return (
-      // eslint-disable-next-line jsx-a11y/alt-text
       <Image 
-        {...props}
-        alt={alt}
+        {...imageProps}
         quality={desktopQuality}
         sizes={sizes || desktopSizes}
-        priority={priority}
-        loading={loadingValue}
+        alt={alt} /* Ensure alt is explicitly set */
       />
     );
   }
 
   return (
-    // eslint-disable-next-line jsx-a11y/alt-text
     <Image 
-      {...props}
-      alt={alt}
-      quality={isMobile ? mobileQuality : desktopQuality}
-      sizes={sizes || (isMobile ? mobileSizes : desktopSizes)}
-      priority={priority}
-      loading={loadingValue}
+      {...imageProps}
+      quality={quality}
+      sizes={sizeValue}
+      alt={alt} /* Ensure alt is explicitly set */
     />
   );
 } 

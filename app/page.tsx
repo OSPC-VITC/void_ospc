@@ -6,45 +6,54 @@ import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa"
 import { motion } from "framer-motion"
 import EventHorizon from "@/components/EventHorizon"
 import AnimatedDots from "@/components/AnimatedDots"
-import { useRef } from "react"
+import { useRef, memo, useMemo } from "react"
 import { HeroScrollDemo } from "@/components/HeroScrollDemo"
 import AboutSection from "@/components/AboutSection"
 import TracksSection from "@/components/TracksSection"
 import PrizesSection from "@/components/PrizesSection"
 import JudgesSection from "@/components/JudgesSection"
 import OrganisersSection from "@/components/OrganizersSection"
+import { OptimizedImage } from "@/components/ui/optimized-image"
 
 import * as THREE from 'three'
 import { useFrame, Canvas } from '@react-three/fiber'
-import { MeshDistortMaterial, AdaptiveDpr, Environment } from '@react-three/drei'
+import { MeshDistortMaterial, AdaptiveDpr, Environment, useGLTF } from '@react-three/drei'
 
-function VoidSphere() {
+// Memoized VoidSphere component to prevent unnecessary re-renders
+const VoidSphere = memo(function VoidSphere() {
   const meshRef = useRef<THREE.Mesh>(null!)
   
   useFrame(({ clock }) => {
     if (meshRef.current) {
-      meshRef.current.rotation.z = clock.getElapsedTime() * 0.1
-      meshRef.current.rotation.y = clock.getElapsedTime() * 0.15
+      // Use elapsed time for smoother animation
+      const time = clock.getElapsedTime()
+      meshRef.current.rotation.z = time * 0.1
+      meshRef.current.rotation.y = time * 0.15
     }
   })
+  
+  // Memoize material properties to avoid recreating them on each render
+  const materialProps = useMemo(() => ({
+    color: "#240046",
+    distort: 0.4,
+    speed: 4,
+    roughness: 0.2,
+    metalness: 2,
+    opacity: 1,
+    transparent: true,
+    wireframe: false
+  }), [])
   
   return (
     <mesh ref={meshRef} position={[0, 0, 0]} scale={1.8}>
       <sphereGeometry args={[3, 128, 128]} />
       <MeshDistortMaterial
-        color="#240046"
         attach="material"
-        distort={0.4}
-        speed={4}
-        roughness={0.2}
-        metalness={2}
-        opacity={1}
-        transparent={true}
-        wireframe={false}
+        {...materialProps}
       />
     </mesh>
   )
-}
+})
 
 export default function HomePage() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -64,6 +73,13 @@ export default function HomePage() {
     }
   }
 
+  // Memoize the Canvas settings to prevent unnecessary re-renders
+  const canvasSettings = useMemo(() => ({
+    camera: { position: [0, 0, 15] as [number, number, number], fov: 65 },
+    dpr: [1, 2] as [number, number], // Limit max DPR for better performance
+    performance: { min: 0.5 } // Allow scaling down for better performance
+  }), [])
+
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
       {/* Background Animated Dots */}
@@ -75,7 +91,11 @@ export default function HomePage() {
         <div className="w-full flex flex-col items-center justify-center pt-0 pb-2 relative hero-section">
           {/* Void Sphere Canvas */}
           <div className="sphere-container w-full h-[450px] relative mb-0">
-            <Canvas camera={{ position: [0, 0, 15], fov: 65 }}>
+            <Canvas 
+              camera={canvasSettings.camera}
+              dpr={canvasSettings.dpr}
+              performance={canvasSettings.performance}
+            >
               <AdaptiveDpr pixelated />
               <ambientLight intensity={0.2} />
               <directionalLight position={[10, 10, 10]} intensity={0.5} color="#9333EA" />
@@ -87,10 +107,15 @@ export default function HomePage() {
             
             {/* Logo overlay in center of sphere */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[220px] md:w-[280px] z-10 void-logo-pulse">
-              <img
+              <OptimizedImage
                 src="/images/text.png"
                 alt="Void Logo"
+                width={280}
+                height={120}
                 className="w-full h-auto"
+                priority={true}
+                desktopQuality={90}
+                mobileQuality={75}
               />
             </div>
             

@@ -1,7 +1,7 @@
 "use client"
 import React, { useRef } from 'react';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView, easeInOut, easeOut, cubicBezier } from 'framer-motion';
 import { Card, CardContent } from './ui/card';
 import { Calendar, Shield } from "lucide-react"; // Only keep the icons you use
 
@@ -33,7 +33,7 @@ const AboutSection: React.FC = () => {
       y: 0, 
       transition: { 
         duration: 0.7, 
-        ease: [0.25, 0.1, 0.25, 1.0] 
+        ease: cubicBezier(0.25, 0.1, 0.25, 1.0) 
       } 
     }
   };
@@ -45,7 +45,7 @@ const AboutSection: React.FC = () => {
       y: 0, 
       transition: { 
         duration: 0.6, 
-        ease: "easeOut",
+        ease: easeOut,
         staggerChildren: 0.08,
         delayChildren: 0.2
       }
@@ -62,7 +62,7 @@ const AboutSection: React.FC = () => {
     transition: {
       duration: 2,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: easeInOut
     }
   };
   
@@ -89,13 +89,13 @@ const AboutSection: React.FC = () => {
       scale: 1,
       transition: { 
         duration: 0.7,
-        ease: [0.25, 0.1, 0.25, 1.0]
+        ease: cubicBezier(0.25, 0.1, 0.25, 1.0)
       }
     },
     hover: {
       y: -8,
       scale: 1.02,
-      transition: { duration: 0.3, ease: "easeOut" }
+      transition: { duration: 0.3, ease: easeOut }
     }
   };
   
@@ -234,7 +234,7 @@ const AboutSection: React.FC = () => {
                     <h3 className="text-2xl font-heading ml-5 font-semibold tracking-wide text-white">The Event</h3>
                   </div>
                   <p className="text-base md:text-lg text-gray-300 leading-relaxed">
-                    With our cutting-edge tracks focused on future technologies, VOID challenges participants to think beyond the conventional, developing solutions that bridge the gap between imagination and reality. Experience a hackathon that's not just about coding but about creating technological marvels that could define tomorrow.
+                    With our cutting-edge tracks focused on future technologies, VOID challenges participants to think beyond the conventional, developing solutions that bridge the gap between imagination and reality. Experience a hackathon that&apos;s not just about coding but about creating technological marvels that could define tomorrow.
                   </p>
                 </CardContent>
               </Card>
@@ -275,7 +275,7 @@ const AboutSection: React.FC = () => {
                     <h3 className="text-2xl font-heading ml-5 font-semibold tracking-wide text-white">Our Approach</h3>
                   </div>
                   <p className="text-base md:text-lg text-gray-300 leading-relaxed">
-                    At VOID, we don't just promote innovation—we foster an environment where technological boundaries dissolve. With mentorship from industry experts and exclusive speaker sessions, participants gain insights that transform their ideas from concepts to impactful solutions ready for the real world.
+                    At VOID, we don&apos;t just promote innovation—we foster an environment where technological boundaries dissolve. With mentorship from industry experts and exclusive speaker sessions, participants gain insights that transform their ideas from concepts to impactful solutions ready for the real world.
                   </p>
                 </CardContent>
               </Card>
