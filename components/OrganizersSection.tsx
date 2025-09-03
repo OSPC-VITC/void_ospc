@@ -26,7 +26,7 @@ const organizers: Organizer[] = [
   {
     id: 1,
     name: "OSPC",
-    role: "Lead Organizer",
+    role: "Organizer",
     bio: "The Open Source Programming Club at VIT Chennai is dedicated to fostering innovation through open source collaboration and building a vibrant tech community on campus.",
     imageUrl: "/ospc.png",
     socialLinks: {
@@ -39,7 +39,7 @@ const organizers: Organizer[] = [
   {
     id: 2,
     name: "BIC",
-    role: "Co-Organizer",
+    role: "Organizer",
     bio: "Business Incubation Center at VIT Chennai fosters innovation and entrepreneurship, providing resources and mentorship for student startups to thrive in the competitive business landscape.",
     imageUrl: "/csed.png",
     socialLinks: {
